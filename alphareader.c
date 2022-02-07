@@ -6,14 +6,14 @@ bool isValidDelimiter(char ch) {
    if (ch == ' ' || ch == '\n' || ch == '+' || ch == '-' || ch == '*' ||
    ch == '/' || ch == ',' || ch == ';' || ch == '>' ||
    ch == '<' || ch == '=' || ch == '(' || ch == ')' ||
-   ch == '[' || ch == ']' || ch == '{' || ch == '}')
+   ch == '[' || ch == ']' || ch == '{' || ch == '}' || ch == '|' || ch == '&' || ch == '!' || ch == 9)
    return (true);
    return (false);
 }
 bool isValidOperator(char ch){
    if (ch == '+' || ch == '-' || ch == '*' ||
    ch == '/' || ch == '>' || ch == '<' ||
-   ch == '=')
+   ch == '=' || ch == '|' || ch == '&' || ch == '!')
    return (true);
    return (false);
 }
@@ -22,7 +22,7 @@ bool isvalidIdentifier(char* str){
    if (str[0] == '0' || str[0] == '1' || str[0] == '2' ||
    str[0] == '3' || str[0] == '4' || str[0] == '5' ||
    str[0] == '6' || str[0] == '7' || str[0] == '8' ||
-   str[0] == '9' || isValidDelimiter(str[0]) == true)
+   str[0] == '9' || str[0] == '_' || isValidDelimiter(str[0]) == true)
    return (false);
    return (true);
 }
@@ -74,8 +74,10 @@ void detectTokens(char* str) {
       if (isValidDelimiter(str[right]) == false)
       right++;
       if (isValidDelimiter(str[right]) == true && left == right) {
-         if (isValidOperator(str[right]) == true)
-         printf("Valid operator : '%c'\n", str[right]);
+         if (isValidOperator(str[right]) == true){
+         printf("Valid operator : '%c'\n", str[right]);}
+         else
+          printf("Valid delimiter : '%c'\n", str[right]);
          right++;
          left = right;
       } else if (isValidDelimiter(str[right]) == true && left != right || (right == length && left !=       right)) {
